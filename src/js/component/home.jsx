@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
+
 const Home = () => {
+
 	const [tasks, setTasks] = useState([""]);
 	const [newTask, setNewTask] = useState("");
 
@@ -24,21 +26,24 @@ const Home = () => {
 	const listItems = tasks.map((task, index) => <li key={index}>{task}</li>);
 
 	return (
-		<div className="container my-5">
-			<h1 className="text-center mb-4">Mis Tareas</h1>
-			<div className="notebook">
-				<ul className="list-group shadow">
-					{listItems}
-				</ul>
+		<div ClassName="w-50 text-center mb-3" >
+			<div className="list-group">
+				<div className="list-group-item d-flex gap-2">
+					<input
+						className="form-control mt-3"
+						type="text"
+						placeholder="Añade una nueva tarea..."
+						value={newTask}
+						onChange={handleNewTaskChange}
+						onKeyPress={handleKeyPress}
+					/>
+				</div>
+				<div className="list-group-item d-flex gap-2">
+					<ul>
+						{listItems}
+					</ul>
+				</div>
 			</div>
-			<input
-				className="form-control mt-3"
-				type="text"
-				placeholder="Añade una nueva tarea..."
-				value={newTask}
-				onChange={handleNewTaskChange}
-				onKeyPress={handleKeyPress}
-			/>
 		</div>
 	);
 };
