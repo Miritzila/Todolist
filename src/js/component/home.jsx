@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Home = () => {
-    const [tasks, setTasks] = useState([""]);
+    const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState("");
 
     const handleNewTaskChange = (event) => {
@@ -21,9 +21,14 @@ const Home = () => {
         }
     };
 
+    const removeTask = (indexToRemove) => {
+        setTasks(tasks.filter((_, index) => index !== indexToRemove));
+    };
+
     const listItems = tasks.map((task, index) => (
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
             {task}
+            <button onClick={() => removeTask(index)} className="btn btn-danger btn-sm">X</button>
         </li>
     ));
 
@@ -32,7 +37,7 @@ const Home = () => {
             <div className="w-50 text-center mb-3">
             </div>
             <ul className="list-group w-100">
-				<li><input
+                <li><input
                     className="form-control"
                     type="text"
                     placeholder="Añade una nueva tarea..."
@@ -41,6 +46,7 @@ const Home = () => {
                     onKeyPress={handleKeyPress}
                 /></li>
                 {listItems}
+                <li className="list-group-item d-flex justify-content-between align-items-center"><strong>{tasks.length} tareas por hacer</strong></li>
             </ul>
         </div>
     );
